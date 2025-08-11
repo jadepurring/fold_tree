@@ -3,7 +3,7 @@ from pathlib import Path
 
 import AFDB_tools
 
-path = Path(Path(snakemake.input[0]).parent.name).joinpath("structs")
+path = Path(Path(snakemake.input[0]).parent).joinpath("structs")
 all_structs = {}
 for struct in path.iterdir():
     if struct.name.endswith(".pdb"):
