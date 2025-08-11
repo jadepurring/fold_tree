@@ -10,7 +10,7 @@ version = "0.0.1"
 authors = [
   { name="Dave Moi", email="dmoi@unil.ch" },
   { name="Mauricio Langlieb", email="dmoi@unil.ch" },
-  
+
 ]
 dependencies = ["biopython",
 "requests",
