@@ -23,9 +23,9 @@ rule all:
 		expand("{folder}/{mattype}_struct_tree.PP.nwk.rooted.final", folder = config["folder"], mattype = mattypes),
 
 rule mad_root_post:
-	conda:
+	# conda:
 		#"config/fold_tree.yaml"
-		"foldtree"
+	#	"foldtree"
 	input:
 		"{folder}/{mattype}_struct_tree.PP.nwk"
 	output:
@@ -34,11 +34,11 @@ rule mad_root_post:
 		"{folder}/logs/{mattype}_struct_madroot_post.log"
 	script:
 		'../src/process_madroot.py'
-	
+
 rule mad_root_struct:
-	conda:
+	# conda:
 		#"config/fold_tree.yaml"
-		"foldtree"
+	#	"foldtree"
 	input:
 		"{folder}/{mattype}_struct_tree.PP.nwk"
 	output:
@@ -49,9 +49,9 @@ rule mad_root_struct:
 		rootdir+'madroot/mad {wildcards.folder}/{wildcards.mattype}_struct_tree.PP.nwk'
 
 rule postprocess:
-	conda:
+	# conda:
 		#"config/fold_tree.yaml"
-		"foldtree"
+	#	"foldtree"
 	input:
 		"{folder}/{mattype}_struct_tree.nwk"
 	output:
@@ -62,9 +62,9 @@ rule postprocess:
 		'../src/postprocess.py'
 
 rule quicktree:
-	conda:
+	# conda:
 		#"config/fold_tree.yaml"
-		"foldtree"
+	#	"foldtree"
 	input:
 		"{folder}/{mattype}_fastmemat.txt"
 	output:
@@ -75,9 +75,9 @@ rule quicktree:
 		'quicktree -i m {wildcards.folder}/{wildcards.mattype}_fastmemat.txt > {wildcards.folder}/{wildcards.mattype}_struct_tree.nwk '
 
 rule foldseek2distmat:
-	conda:
+	# conda:
 		#"config/fold_tree.yaml"
-		"foldtree"
+	#	"foldtree"
 	input:
 		"{folder}/allvall_1.csv"
 	output:
@@ -92,9 +92,9 @@ rule foldseek2distmat:
 		"../src/foldseekres2distmat_simple.py"
 
 rule foldseek_allvall_1:
-	conda:
+	# conda:
 		#"config/fold_tree.yaml"
-		"foldtree"
+	#	"foldtree"
 	input:
 		"{folder}/finalset.csv"
 	output:
@@ -102,12 +102,12 @@ rule foldseek_allvall_1:
 	log:
 		"{folder}/logs/foldseekallvall.log"
 	shell:
-		foldseekpath + " easy-search {wildcards.folder}/structs/ {wildcards.folder}/structs/ {wildcards.folder}/allvall_1.csv {wildcards.folder}/tmp --format-output 'query,target,fident,alnlen,mismatch,gapopen,qstart,qend,tstart,tend,evalue,bits,lddt,lddtfull,alntmscore' --exhaustive-search --alignment-type 2 -e inf --threads " + str(config['foldseek_cores']) 
+		foldseekpath + " easy-search {wildcards.folder}/structs/ {wildcards.folder}/structs/ {wildcards.folder}/allvall_1.csv {wildcards.folder}/tmp --format-output 'query,target,fident,alnlen,mismatch,gapopen,qstart,qend,tstart,tend,evalue,bits,lddt,lddtfull,alntmscore' --exhaustive-search --alignment-type 2 -e inf --threads " + str(config['foldseek_cores'])
 
 rule dl_ids_sequences:
-	conda: 
+	# conda:
 		#"config/fold_tree.yaml"
-		"foldtree"
+	#	"foldtree"
 	input:
 		ids="{folder}/identifiers.txt",
 	output:
@@ -122,9 +122,9 @@ rule dl_ids_sequences:
 		"../src/dl_sequences.py"
 
 rule plddt:
-	conda:
+	# conda:
 		#"config/fold_tree.yaml"
-		"foldtree"
+	#	"foldtree"
 	input:
 		"{folder}/finalset.csv",
 	output:
@@ -140,9 +140,9 @@ rule dl_ids_structs:
 	output:
 		#"{folder}/sequences.fst",
 		"{folder}/finalset.csv",
-	conda: 
+	# conda:
 		#"config/fold_tree.yaml"
-		"foldtree",
+	#	"foldtree",
 	log:
 		"{folder}/logs/dlstructs.log",
 	params:
